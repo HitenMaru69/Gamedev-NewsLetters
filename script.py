@@ -59,9 +59,33 @@ author:
 
 def split_and_send_telegram(bot_token, chat_id, text, reply_markup=None):
     url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
-    
-    # Telegram max character limit is 4096. We split at 3800 to be safe.
     max_len = 3800
+
+    def send_with_fallback(payload, chunk_index=0):
+        # 1. Try sending with Markdown
+        res = requests.post(url, json=payload)
+        if res.status_code == 200:
+            return res.json()
+
+        log(f"Telegram Markdown parse failed (chunk {chunk_index}): {res.text}. Trying HTML parsing...")
+        
+        # 2. Try HTML parse mode
+        html_payload = payload.copy()
+        html_payload["parse_mode"] = "HTML"
+        res = requests.post(url, json=html_payload)
+        if res.status_code == 200:
+            return res.json()
+
+        log(f"Telegram HTML parse failed (chunk {chunk_index}): {res.text}. Sending as plain text...")
+        
+        # 3. Fallback to raw plain text (removes formatting, guaranteed delivery)
+        plain_payload = payload.copy()
+        plain_payload.pop("parse_mode", None)
+        # Simple scrub to clean any stray formatting cues from plain text
+        res = requests.post(url, json=plain_payload)
+        log(f"Telegram raw delivery (chunk {chunk_index}) status: {res.status_code}")
+        return res.json()
+    
     if len(text) <= max_len:
         payload = {
             "chat_id": chat_id,
@@ -69,11 +93,9 @@ def split_and_send_telegram(bot_token, chat_id, text, reply_markup=None):
             "parse_mode": "Markdown",
             "reply_markup": reply_markup
         }
-        res = requests.post(url, json=payload)
-        log(f"Telegram response: {res.status_code}")
-        return res.json()
+        return send_with_fallback(payload, 0)
     
-    # Split the message into chunks, trying to break at newlines
+    # Split the message into chunks
     chunks = []
     current_chunk = ""
     for line in text.split("\n"):
@@ -88,25 +110,23 @@ def split_and_send_telegram(bot_token, chat_id, text, reply_markup=None):
     if current_chunk:
         chunks.append(current_chunk)
         
-    # Send all but the last chunk without reply_markup
+    # Send all but the last chunk
     for i, chunk in enumerate(chunks[:-1]):
         payload = {
             "chat_id": chat_id,
             "text": f"{chunk}\n\n*(Continued in next message...)*",
             "parse_mode": "Markdown"
         }
-        requests.post(url, json=payload)
+        send_with_fallback(payload, i + 1)
         
-    # Send the final chunk with the interactive buttons
+    # Send the final chunk with buttons
     payload = {
         "chat_id": chat_id,
         "text": chunks[-1],
         "parse_mode": "Markdown",
         "reply_markup": reply_markup
     }
-    res = requests.post(url, json=payload)
-    log(f"Telegram final chunk response: {res.status_code}")
-    return res.json()
+    return send_with_fallback(payload, len(chunks))
 
 def main():
     log("Starting AI Game Dev Newsletter Python Engine")
