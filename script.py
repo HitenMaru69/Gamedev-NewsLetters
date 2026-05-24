@@ -128,6 +128,29 @@ def split_and_send_telegram(bot_token, chat_id, text, reply_markup=None):
     }
     return send_with_fallback(payload, len(chunks))
 
+def clean_gemini_markdown(text):
+    text = text.strip()
+    # Strip any potential fenced code blocks that LLMs sometimes generate
+    if text.startswith("```markdown"):
+        text = text[11:].strip()
+    elif text.startswith("```yaml"):
+        text = text[7:].strip()
+    elif text.startswith("```"):
+        text = text[3:].strip()
+        
+    if text.endswith("```"):
+        text = text[:-3].strip()
+    return text
+
+def save_markdown_draft(slug, full_text):
+    os.makedirs("posts", exist_ok=True)
+    file_path = os.path.join("posts", f"{slug}.md")
+    
+    with open(file_path, "w", encoding="utf-8") as f:
+        f.write(full_text)
+    log(f"Saved complete markdown draft to {file_path}")
+    return file_path
+
 def main():
     log("Starting AI Game Dev Newsletter Python Engine")
     
@@ -148,17 +171,10 @@ def main():
     # Initialize the Gemini SDK
     client = genai.Client(api_key=gemini_api_key)
     
-    # Define structured schema for JSON output
-    newsletter_schema = {
-        "type": "OBJECT",
-        "properties": {
-            "title": {"type": "STRING", "description": "Catchy title for the game dev newsletter"},
-            "excerpt": {"type": "STRING", "description": "Short 1-2 sentence summary"},
-            "slug": {"type": "STRING", "description": "URL friendly slug based on title (lowercase, hyphens)"},
-            "content": {"type": "STRING", "description": "Full newsletter article content in markdown format, retaining sources"}
-        },
-        "required": ["title", "excerpt", "slug", "content"]
-    }
+    # We do NOT use structured JSON schemas here because it conflicts with search grounding!
+    # Instead, we request standard YAML front-matter directly in the markdown response.
+    
+    import re
     
     if action == "edit" and target_slug:
         log(f"MODE: Editing existing draft '{target_slug}' with feedback")
@@ -168,25 +184,20 @@ def main():
             log(f"ERROR: Target draft '{file_path}' not found. Defaulting to new generation mode.")
             action = "generate"
         else:
-            metadata, content = parse_front_matter(file_path)
-            title = metadata.get("title", "Game Dev Weekly Roundup")
-            excerpt = metadata.get("excerpt", "")
+            with open(file_path, "r", encoding="utf-8") as f:
+                previous_full_text = f.read()
             
             prompt = f"""You are an expert game development editor. You are editing a weekly newsletter draft.
 
-Here is the current draft details:
----
-TITLE: {title}
-EXCERPT: {excerpt}
-SLUG: {target_slug}
-CONTENT:
-{content}
----
+Here is the current draft of the newsletter (including its YAML front-matter metadata):
+{previous_full_text}
 
-The user has provided the following edit feedback:
+The user has requested the following changes/feedback:
 "{feedback}"
 
-Apply these modifications precisely. Retain all original source hyperlinks and keep the format engaging, professional, and reader-focused.
+Apply these modifications precisely. Maintain the engaging Sunday newsletter format, professional tone, all original hyperlinks, and the EXACT YAML front-matter structure at the top (updating the title/excerpt in the front-matter if appropriate, but keeping draft: true and the slug value exactly as '{target_slug}').
+
+You MUST format your entire response as a single valid Markdown document containing front-matter metadata at the very top. Do NOT wrap your entire response in markdown block quotes (like ```markdown ... ```). Start your response directly with the YAML delimiter ---.
 """
             
             log("Calling Gemini with Search Grounding to apply edits...")
@@ -196,17 +207,22 @@ Apply these modifications precisely. Retain all original source hyperlinks and k
                     contents=prompt,
                     config=types.GenerateContentConfig(
                         tools=[{"google_search": {}}],
-                        response_mime_type="application/json",
-                        response_schema=newsletter_schema,
                         temperature=0.2
                     ),
                 )
                 
-                result = json.loads(response.text)
-                title = result.get("title", title)
-                excerpt = result.get("excerpt", excerpt)
-                content = result.get("content", content)
-                slug = target_slug # Keep original slug to overwrite file cleanly
+                cleaned_text = clean_gemini_markdown(response.text)
+                
+                # Extract meta-details using regex for Telegram presentation
+                title_match = re.search(r"title:\s*\"?([^\n\"]+)\"?", cleaned_text)
+                title = title_match.group(1) if title_match else "Weekly Game Dev Roundup"
+                
+                excerpt_match = re.search(r"excerpt:\s*\"?([^\n\"]+)\"?", cleaned_text)
+                excerpt = excerpt_match.group(1) if excerpt_match else ""
+                
+                slug = target_slug # Force overwrite target
+                content_parts = cleaned_text.split("---", 2)
+                content_only = content_parts[2].strip() if len(content_parts) >= 3 else cleaned_text
                 
             except Exception as e:
                 log(f"Gemini edit API failure: {e}")
@@ -214,17 +230,28 @@ Apply these modifications precisely. Retain all original source hyperlinks and k
                 
     else:
         log("MODE: Generating a new on-demand newsletter")
-        current_date = datetime.datetime.now().strftime("%B %d, %Y")
+        current_date = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S.000Z")
         
-        prompt = f"""Conduct deep web research on major game development breakthroughs, software engine updates (Unity, Unreal Engine, Godot), indie game showcases, and industry news that occurred over the past 7 days (prior to today {current_date}). 
+        prompt = f"""You are an expert game development researcher and editor.
+Conduct deep web research on major game development breakthroughs, software engine updates (Unity, Unreal Engine, Godot), indie game showcases, and industry news that occurred over the past 7 days (prior to today). 
 
 Compile this into a highly structured, engaging Sunday newsletter format. Ensure all original hyperlinks to source material are strictly retained.
 
-Include sections for:
-1. Major Engine Updates (Unity, Unreal Engine, Godot, etc.)
-2. Next-Gen Tech & AI in Game Dev
-3. Indie Spotlight (notable releases, demos, or showcases)
-4. Industry & Community News
+You MUST format your entire response as a single valid Markdown document containing front-matter metadata at the very top. Do NOT wrap your entire response in markdown block quotes (like ```markdown ... ```). Start your response directly with the YAML delimiter ---.
+
+Format your response EXACTLY like this:
+---
+title: "A catchy and professional title for the game dev newsletter"
+excerpt: "A short, 1-2 sentence compelling summary of this edition"
+date: "{current_date}"
+draft: true
+author:
+  name: "AI Editor"
+slug: "lowercase-hyphen-separated-url-slug"
+---
+
+# Your newsletter content starts here...
+Use subheadings, bullet points, bold text, and source hyperlinks.
 """
         
         log("Calling Gemini with Search Grounding to conduct web research...")
@@ -234,26 +261,33 @@ Include sections for:
                 contents=prompt,
                 config=types.GenerateContentConfig(
                     tools=[{"google_search": {}}],
-                    response_mime_type="application/json",
-                    response_schema=newsletter_schema,
                     temperature=0.4
                 ),
             )
             
-            result = json.loads(response.text)
-            title = result.get("title", "The Weekly Game Dev Roundup")
-            excerpt = result.get("excerpt", "")
-            content = result.get("content", "")
-            slug = result.get("slug", f"newsletter-{datetime.datetime.now().strftime('%Y-%m-%d')}")
+            cleaned_text = clean_gemini_markdown(response.text)
+            
+            # Extract meta-details using regex
+            title_match = re.search(r"title:\s*\"?([^\n\"]+)\"?", cleaned_text)
+            title = title_match.group(1) if title_match else "The Weekly Game Dev Roundup"
+            
+            excerpt_match = re.search(r"excerpt:\s*\"?([^\n\"]+)\"?", cleaned_text)
+            excerpt = excerpt_match.group(1) if excerpt_match else ""
+            
+            slug_match = re.search(r"slug:\s*\"?([a-zA-Z0-9_-]+)\"?", cleaned_text)
+            slug = slug_match.group(1).lower() if slug_match else f"newsletter-{datetime.datetime.now().strftime('%Y-%m-%d')}"
+            
+            content_parts = cleaned_text.split("---", 2)
+            content_only = content_parts[2].strip() if len(content_parts) >= 3 else cleaned_text
             
         except Exception as e:
             log(f"Gemini generation API failure: {e}")
             sys.exit(1)
             
-    # Save the updated or newly generated draft post
-    save_draft(slug, title, excerpt, content)
+    # Save the complete raw markdown text directly to posts (it includes front-matter natively!)
+    save_markdown_draft(slug, cleaned_text)
     
-    # Format the message to send to Telegram
+    # Format the preview message to send to Telegram
     telegram_text = f"""🤖 *AI Game Dev Newsletter Draft Ready!*
 
 *Title:* {title}
@@ -263,7 +297,7 @@ Include sections for:
 ---
 *DRAFT CONTENT:*
 
-{content}
+{content_only}
 """
     
     # Inline Buttons
