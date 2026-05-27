@@ -21,59 +21,31 @@ export default function Home() {
               </svg>
             </div>
             <span className="font-extrabold text-sm tracking-wider uppercase text-neutral-100 group-hover:text-purple-400 transition-colors">
-              AI Game Dev
+              GameDev Newsletters
             </span>
           </Link>
           <nav className="hidden sm:flex items-center space-x-6 text-sm font-semibold text-neutral-400">
             <Link href="/" className="text-purple-400 hover:text-purple-300 transition-colors">
               Editions
             </Link>
-            <a href="https://github.com" target="_blank" rel="noreferrer" className="hover:text-neutral-200 transition-colors">
-              GitHub
-            </a>
-            <span className="text-neutral-800">|</span>
-            <span className="text-xs font-semibold bg-neutral-900 px-3 py-1 rounded-full text-purple-400 border border-neutral-800">
-              ⚡ Serverless On-Demand
-            </span>
           </nav>
         </div>
       </header>
 
       {/* Main Container */}
       <div className="max-w-4xl mx-auto px-6 py-16 sm:py-24 relative">
-        
+
         {/* Hero Section */}
         <section className="text-center mb-20 space-y-6 relative">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-xs font-semibold text-purple-400 tracking-wide uppercase">
-            <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse" />
-            Curated by Intelligence, Approved by You
-          </div>
 
           <h1 className="text-5xl sm:text-7xl font-black tracking-tight leading-tight bg-gradient-to-r from-purple-400 via-pink-400 to-amber-300 text-transparent bg-clip-text">
-            AI Game Dev <br />
+            Game Dev Newsletters <br />
             <span className="text-neutral-100 font-extrabold">Weekly Newsletter</span>
           </h1>
 
           <p className="text-lg sm:text-xl text-neutral-400 max-w-2xl mx-auto font-light leading-relaxed">
-            Your on-demand roundup of breakthroughs in game engines, rendering tech, indie gems, and creative AI workflows—fully automated and approved via Telegram.
+            Bridging the gap between artificial intelligence and game creation. Exploring the breakthrough tools, rendering engines, and developer stories shaping the future of interactive entertainment.
           </p>
-
-          {/* Stats Bar */}
-          <div className="flex items-center justify-center gap-6 pt-4 text-xs font-medium text-neutral-500">
-            <div className="flex items-center gap-2">
-              <svg className="w-4 h-4 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-              </svg>
-              <span>Mock Subscriber Feed</span>
-            </div>
-            <span>•</span>
-            <div className="flex items-center gap-2">
-              <svg className="w-4 h-4 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-              </svg>
-              <span>100% Serverless Architecture</span>
-            </div>
-          </div>
         </section>
 
         {/* Dynamic Client-Side Filter/Search Archive Component */}
@@ -82,9 +54,6 @@ export default function Home() {
         {/* Footer */}
         <footer className="mt-32 pt-8 border-t border-neutral-900 text-center text-xs text-neutral-600 space-y-2">
           <p>© {new Date().getFullYear()} AI Game Dev. Powered by Next.js, Vercel, and Gemini Search Grounding.</p>
-          <p>
-            Managed serverlessly from a secure Telegram interface. Powered by GitHub Actions dispatch workflows.
-          </p>
         </footer>
 
       </div>

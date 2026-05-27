@@ -14,7 +14,7 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
   const resolvedParams = await params;
   const post = getPostBySlug(resolvedParams.slug, ["title", "date", "slug", "author", "content"]);
 
-  if (!post) {
+  if (!post || (post.draft === true && process.env.NODE_ENV !== "development")) {
     return notFound();
   }
 

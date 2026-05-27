@@ -34,7 +34,7 @@ export default function NewsletterArchive({ initialPosts }: NewsletterArchivePro
       if (text.includes("unreal")) tagsSet.add("Unreal");
       if (text.includes("ai") || text.includes("generative")) tagsSet.add("AI");
       if (text.includes("indie")) tagsSet.add("Indie");
-      
+
       if (post.tags) {
         post.tags.forEach(t => tagsSet.add(t));
       }
@@ -47,7 +47,7 @@ export default function NewsletterArchive({ initialPosts }: NewsletterArchivePro
     return initialPosts.filter((post) => {
       const text = `${post.title} ${post.excerpt}`.toLowerCase();
       const matchesSearch = text.includes(searchQuery.toLowerCase());
-      
+
       let matchesTag = true;
       if (selectedTag) {
         matchesTag = text.includes(selectedTag.toLowerCase()) || !!(post.tags && post.tags.includes(selectedTag));
@@ -77,15 +77,14 @@ export default function NewsletterArchive({ initialPosts }: NewsletterArchivePro
         </div>
 
         {/* Filter Tags */}
-        <div className="flex flex-wrap gap-2.5 items-center">
+        {/* <div className="flex flex-wrap gap-2.5 items-center">
           <span className="text-xs font-semibold uppercase tracking-wider text-neutral-500 mr-2">Filter Topics:</span>
           <button
             onClick={() => setSelectedTag(null)}
-            className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-300 cursor-pointer ${
-              selectedTag === null
-                ? "bg-purple-500/20 text-purple-300 border border-purple-500/40 shadow-sm shadow-purple-500/10"
-                : "bg-neutral-950 text-neutral-400 border border-neutral-800 hover:text-neutral-200 hover:border-neutral-700"
-            }`}
+            className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-300 cursor-pointer ${selectedTag === null
+              ? "bg-purple-500/20 text-purple-300 border border-purple-500/40 shadow-sm shadow-purple-500/10"
+              : "bg-neutral-950 text-neutral-400 border border-neutral-800 hover:text-neutral-200 hover:border-neutral-700"
+              }`}
           >
             All Editions
           </button>
@@ -93,17 +92,17 @@ export default function NewsletterArchive({ initialPosts }: NewsletterArchivePro
             <button
               key={tag}
               onClick={() => setSelectedTag(tag)}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-300 cursor-pointer ${
-                selectedTag === tag
-                  ? "bg-purple-500/20 text-purple-300 border border-purple-500/40 shadow-sm shadow-purple-500/10"
-                  : "bg-neutral-950 text-neutral-400 border border-neutral-800 hover:text-neutral-200 hover:border-neutral-700"
-              }`}
+              className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-300 cursor-pointer ${selectedTag === tag
+                ? "bg-purple-500/20 text-purple-300 border border-purple-500/40 shadow-sm shadow-purple-500/10"
+                : "bg-neutral-950 text-neutral-400 border border-neutral-800 hover:text-neutral-200 hover:border-neutral-700"
+                }`}
             >
               #{tag}
             </button>
           ))}
-        </div>
+        </div> */}
       </div>
+
 
       {/* Posts Feed */}
       <section className="space-y-6">
@@ -111,7 +110,7 @@ export default function NewsletterArchive({ initialPosts }: NewsletterArchivePro
           // Dynamically compute estimated reading time
           const wordCount = post.title.split(/\s+/).length + post.excerpt.split(/\s+/).length + 200; // rough estimate
           const readTime = Math.max(1, Math.ceil(wordCount / 225));
-          
+
           return (
             <article
               key={post.slug}
@@ -119,21 +118,21 @@ export default function NewsletterArchive({ initialPosts }: NewsletterArchivePro
             >
               {/* Card Glow Effect */}
               <div className="absolute top-0 right-0 w-48 h-48 bg-purple-500/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-              
+
               <Link href={`/posts/${post.slug}`} className="absolute inset-0 z-10">
                 <span className="sr-only">Read {post.title}</span>
               </Link>
-              
+
               <div className="flex flex-col space-y-4 relative z-0">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
                     <time className="text-xs text-neutral-400 font-medium">
                       {post.date
                         ? new Date(post.date).toLocaleDateString("en-US", {
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric",
-                          })
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        })
                         : ""}
                     </time>
                     <span className="text-neutral-700">•</span>
@@ -143,15 +142,15 @@ export default function NewsletterArchive({ initialPosts }: NewsletterArchivePro
                     Game Dev Weekly
                   </span>
                 </div>
-                
+
                 <h2 className="text-2xl font-bold tracking-tight text-neutral-100 group-hover:text-purple-400 transition-colors duration-300">
                   {post.title}
                 </h2>
-                
+
                 <p className="text-neutral-400 leading-relaxed text-sm">
                   {post.excerpt}
                 </p>
-                
+
                 <div className="pt-2 flex items-center justify-between text-xs font-semibold text-purple-400">
                   <div className="flex items-center space-x-2">
                     <span className="text-neutral-500 text-2xs font-normal">By</span>

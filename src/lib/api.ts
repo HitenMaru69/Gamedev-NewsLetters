@@ -47,7 +47,10 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
   return items;
 }
 
-export function getAllPosts(fields: string[] = [], includeDrafts: boolean = false) {
+export function getAllPosts(
+  fields: string[] = [], 
+  includeDrafts: boolean = process.env.NODE_ENV === "development"
+) {
   const slugs = getPostSlugs();
   const posts = slugs
     .map((slug) => getPostBySlug(slug, fields))
@@ -62,4 +65,5 @@ export async function markdownToHtml(markdown: string) {
   const result = await remark().use(html).process(markdown);
   return result.toString();
 }
+
 
