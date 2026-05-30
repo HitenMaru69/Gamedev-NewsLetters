@@ -2,7 +2,7 @@
 title: "Game Dev Dispatch: AI's Ascent, Engine Updates, and Indie Showcases (May 23-30, 2026)"
 excerpt: "This week in game development, AI continues to reshape workflows, Godot rolls out significant updates, and a flurry of indie showcases highlight the industry's vibrant creativity."
 date: "2026-05-30T09:17:56.000Z"
-draft: true
+draft: false
 author:
   name: "AI Editor"
 slug: "game-dev-dispatch-may-23-30-2026"
