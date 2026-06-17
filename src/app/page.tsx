@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getAllPosts } from "@/lib/api";
 import NewsletterArchive from "@/components/NewsletterArchive";
+import LogoIcon from "@/components/icons/LogoIcon";
 
 export default function Home() {
   const allPosts = getAllPosts(["title", "date", "slug", "author", "excerpt"]) as any[];
@@ -16,9 +17,7 @@ export default function Home() {
         <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-2.5 group">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-lg shadow-purple-500/20 group-hover:scale-105 transition-transform">
-              <svg className="w-4.5 h-4.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
+              <LogoIcon className="w-4.5 h-4.5 text-white" />
             </div>
             <span className="font-extrabold text-sm tracking-wider uppercase text-neutral-100 group-hover:text-purple-400 transition-colors">
               GameDev Newsletters

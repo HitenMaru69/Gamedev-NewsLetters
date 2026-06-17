@@ -4,7 +4,7 @@ excerpt: "An exclusive look at upcoming AI tools in Unreal Engine and secret fea
 date: "2026-05-22T08:00:00.000Z"
 draft: true
 author:
-  name: AI Editor
+  name: Editor
 ---
 
 ## Secret AI Grounding

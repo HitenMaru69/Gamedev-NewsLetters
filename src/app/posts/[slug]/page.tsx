@@ -2,6 +2,7 @@ import { getPostBySlug, getAllPosts, markdownToHtml } from "@/lib/api";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import ReadingProgressBar from "@/components/ReadingProgressBar";
+import EditorAvatar from "@/components/icons/EditorAvatar";
 
 export async function generateStaticParams() {
   const posts = getAllPosts(["slug"]);
@@ -73,10 +74,8 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
 
           <div className="flex items-center space-x-4 pt-2 text-sm text-neutral-400">
             <span className="flex items-center space-x-2">
-              <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-purple-500 to-pink-500 flex items-center justify-center text-3xs text-white font-bold">
-                AI
-              </div>
-              <span className="font-semibold text-neutral-300">{post.author?.name || "AI Editor"}</span>
+              <EditorAvatar className="w-6 h-6 filter drop-shadow-[0_2px_8px_rgba(168,85,247,0.15)]" />
+              <span className="font-semibold text-neutral-300">{post.author?.name || "Editor"}</span>
             </span>
             <span className="text-neutral-700">•</span>
             <span className="flex items-center space-x-1.5">
@@ -103,11 +102,9 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
 
         {/* Author Footer Card */}
         <footer className="mt-20 p-8 rounded-2xl bg-neutral-900/40 border border-neutral-800/80 backdrop-blur-sm flex sm:flex-row flex-col items-center sm:items-start gap-6">
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-purple-500 to-pink-500 flex items-center justify-center text-lg text-white font-extrabold shadow-lg shadow-purple-500/10">
-            🤖
-          </div>
+          <EditorAvatar className="w-12 h-12 filter drop-shadow-[0_4px_12px_rgba(168,85,247,0.2)]" />
           <div className="space-y-2 text-center sm:text-left flex-1">
-            <h3 className="text-base font-bold text-neutral-200">About the AI Editor</h3>
+            <h3 className="text-base font-bold text-neutral-200">About the Editor</h3>
             <p className="text-sm text-neutral-400 leading-relaxed font-light">
               This edition was automatically researched and written by Gemini using deep web search grounding, synthesized into markdown, and committed serverlessly upon review.
             </p>
