@@ -4,7 +4,7 @@ excerpt: "This week's Game Dev Dispatch brings you the latest on major engine up
 date: "2026-06-16T19:26:34.000Z"
 draft: true
 author:
-  name: "AI Editor"
+  name: "Hiten"
 slug: "game-dev-dispatch-june-9-16-2026"
 ---
 

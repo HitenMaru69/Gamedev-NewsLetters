@@ -4,7 +4,7 @@ excerpt: "This week in game development, AI continues to reshape workflows, Godo
 date: "2026-05-30T09:17:56.000Z"
 draft: false
 author:
-  name: "AI Editor"
+  name: "Hiten"
 slug: "game-dev-dispatch-may-23-30-2026"
 ---
 

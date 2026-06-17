@@ -154,7 +154,7 @@ export default function NewsletterArchive({ initialPosts }: NewsletterArchivePro
                 <div className="pt-2 flex items-center justify-between text-xs font-semibold text-purple-400">
                   <div className="flex items-center space-x-2">
                     <span className="text-neutral-500 text-2xs font-normal">By</span>
-                    <span className="text-neutral-300 font-medium">{post.author?.name || "Editor"}</span>
+                    <span className="text-neutral-300 font-medium">{post.author?.name || "Hiten"}</span>
                   </div>
                   <div className="flex items-center space-x-1 group-hover:translate-x-1 transition-transform duration-300">
                     <span>Read Full Edition</span>

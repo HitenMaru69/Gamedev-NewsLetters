@@ -47,7 +47,7 @@ excerpt: "{excerpt}"
 date: "{current_date}"
 draft: true
 author:
-  name: Editor
+  name: Hiten
 ---
 
 {content}
@@ -246,7 +246,7 @@ excerpt: "A short, 1-2 sentence compelling summary of this edition"
 date: "{current_date}"
 draft: true
 author:
-  name: "Editor"
+  name: "Hiten"
 slug: "lowercase-hyphen-separated-url-slug"
 ---
 

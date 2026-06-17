@@ -3,7 +3,7 @@ title: "The State of Game Dev: Weekly Roundup"
 excerpt: "Unity 6 announcements, Godot's new rendering engine features, and top indie games of the week."
 date: "2026-05-18T12:00:00.000Z"
 author:
-  name: Editor
+  name: Hiten
 ---
 
 ## What's New This Week?

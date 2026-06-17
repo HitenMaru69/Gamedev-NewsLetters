@@ -4,7 +4,7 @@ excerpt: "This week, we dive into the latest advancements in game development, s
 date: "2026-05-24T05:38:48.000Z"
 draft: false
 author:
-  name: "Editor"
+  name: "Hiten"
 slug: "weekly-dev-digest-may-24-2026"
 ---
 

@@ -75,7 +75,7 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
           <div className="flex items-center space-x-4 pt-2 text-sm text-neutral-400">
             <span className="flex items-center space-x-2">
               <EditorAvatar className="w-6 h-6 filter drop-shadow-[0_2px_8px_rgba(168,85,247,0.15)]" />
-              <span className="font-semibold text-neutral-300">{post.author?.name || "Editor"}</span>
+              <span className="font-semibold text-neutral-300">{post.author?.name || "Hiten"}</span>
             </span>
             <span className="text-neutral-700">•</span>
             <span className="flex items-center space-x-1.5">
