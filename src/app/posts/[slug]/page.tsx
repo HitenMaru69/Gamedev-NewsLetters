@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import ReadingProgressBar from "@/components/ReadingProgressBar";
 import EditorAvatar from "@/components/icons/EditorAvatar";
+import ArticleReader from "@/components/ArticleReader";
 
 export async function generateStaticParams() {
   const posts = getAllPosts(["slug"]);
@@ -86,6 +87,11 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
             </span>
           </div>
         </header>
+
+        {/* Text-to-Speech Player */}
+        <div className="mb-10">
+          <ArticleReader content={post.content || ""} />
+        </div>
 
         {/* Dynamic prose text rendering */}
         <div 
