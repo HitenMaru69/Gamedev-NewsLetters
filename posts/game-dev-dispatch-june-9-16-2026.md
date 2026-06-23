@@ -2,7 +2,7 @@
 title: "Game Dev Dispatch: Engine Updates, Industry Shifts, and Indie Spotlights (June 9-16, 2026)"
 excerpt: "This week's Game Dev Dispatch brings you the latest on major engine updates from Unity, Unreal Engine, and Godot, alongside critical industry news including potential layoffs and the booming mobile market. Dive into a recap of recent indie showcases and breakthroughs shaping the future of game development."
 date: "2026-06-16T19:26:34.000Z"
-draft: true
+draft: false
 author:
   name: "Hiten"
 slug: "game-dev-dispatch-june-9-16-2026"
