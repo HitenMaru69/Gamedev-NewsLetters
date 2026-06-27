@@ -2,7 +2,7 @@
 title: "Game Dev Dispatch: Unreal Engine 6 Unveiled, Unity 6.5 Arrives, and AI's Growing Footprint"
 excerpt: "This week in game development, Epic Games announced Unreal Engine 6, Unity released version 6.5, and AI continues to transform workflows, alongside a flurry of indie game news and industry shifts."
 date: "2026-06-27T19:04:35.000Z"
-draft: true
+draft: false
 author:
   name: "Hiten"
 slug: "game-dev-dispatch-june-27-2026"
