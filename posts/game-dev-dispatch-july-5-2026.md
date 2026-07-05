@@ -2,7 +2,7 @@
 title: "Game Dev Dispatch: Unreal Engine 6 Unveiled, Godot's AI Stance, and Latest Engine Updates"
 excerpt: "This week in game development, Epic Games revealed the future with Unreal Engine 6, Godot clarified its position on AI contributions, and both Unity and Godot rolled out significant engine updates."
 date: "2026-07-05T07:05:21.000Z"
-draft: true
+draft: false
 author:
   name: "Hiten"
 slug: "game-dev-dispatch-july-5-2026"
