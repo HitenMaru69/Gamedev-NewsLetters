@@ -2,7 +2,7 @@
 title: "Game Dev Dispatch: Unreal Engine 6 Buzz, Godot Updates, and Summer Indie Gems!"
 excerpt: "This week in game development, the industry is abuzz with discussions around Unreal Engine 6's future, fresh updates for Godot, and a vibrant showcase of indie titles. Plus, major remasters and new releases hit the market."
 date: "2026-07-11T19:10:14.000Z"
-draft: true
+draft: false
 author:
   name: "Hiten"
 slug: "game-dev-dispatch-july-11-2026"
