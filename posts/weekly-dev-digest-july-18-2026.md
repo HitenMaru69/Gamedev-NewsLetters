@@ -2,7 +2,7 @@
 title: "The Weekly Dev Digest: AI Surges, Engines Evolve, and Industry Shifts"
 excerpt: "This week in game development, AI continues its transformative ascent, Godot and Unity roll out key updates, and the industry grapples with investment highs and console market shifts."
 date: "2026-07-18T18:24:00.000Z"
-draft: true
+draft: false
 author:
   name: "Hiten"
 slug: "weekly-dev-digest-july-18-2026"
