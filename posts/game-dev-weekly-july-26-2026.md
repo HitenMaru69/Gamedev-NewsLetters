@@ -2,7 +2,7 @@
 title: "Game Dev Weekly: Unity 7 Unveiled, Godot's Latest Snapshot, and Industry Shifts"
 excerpt: "This week in game development saw a major roadmap reveal for Unity 7, a new dev snapshot from Godot, and a look at the evolving landscape of indie showcases and industry challenges."
 date: "2026-07-26T05:28:24.000Z"
-draft: true
+draft: false
 author:
   name: "Hiten"
 slug: "game-dev-weekly-july-26-2026"
