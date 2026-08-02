@@ -2,7 +2,7 @@
 title: "Game Dev Dispatch: Engine Updates, Industry Shifts & Indie Spotlights (July 26 - August 2, 2026)"
 excerpt: "This week, Unity unveils its next-gen engine with a seamless upgrade path, Sony faces backlash over its all-digital future, and the industry grapples with ongoing layoffs. Plus, discover exciting new indie titles and key Godot updates."
 date: "2026-08-02T04:53:19.000Z"
-draft: true
+draft: false
 author:
   name: "Hiten"
 slug: "game-dev-dispatch-july-26-august-2-2026"
