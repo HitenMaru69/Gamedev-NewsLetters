@@ -2,7 +2,7 @@
 title: "The Weekly Dev Dispatch: Engine Evolutions, Indie Innovations, and Industry Insights"
 excerpt: "This week, we dive into groundbreaking AI in procedural generation, crucial engine updates from Unity, Unreal, and Godot, highlights from the latest indie showcases, and significant industry news."
 date: "2026-08-15T07:10:36.000Z"
-draft: true
+draft: false
 author:
   name: "Hiten"
 slug: "the-weekly-dev-dispatch-august-15-2026"
