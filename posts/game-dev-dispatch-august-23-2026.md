@@ -2,7 +2,7 @@
 title: "Game Dev Dispatch: A Week of Innovation and Indie Spotlights"
 excerpt: "This week in game development saw exciting engine updates, groundbreaking tech advancements, and a vibrant showcase of indie creativity, shaping the future of interactive entertainment."
 date: "2026-08-23T03:52:20.000Z"
-draft: true
+draft: false
 author:
   name: "Hiten"
 slug: "game-dev-dispatch-august-23-2026"
