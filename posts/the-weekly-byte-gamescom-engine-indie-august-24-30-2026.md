@@ -2,7 +2,7 @@
 title: "The Weekly Byte: Gamescom Buzz, Engine Updates & Indie Triumphs (August 24-30, 2026)"
 excerpt: "This week, the gaming world was abuzz with Gamescom 2026, significant engine updates from Godot, and exciting news on Unity's future. We also celebrate notable indie successes and delve into the latest market reports."
 date: "2026-08-31T16:13:10.000Z"
-draft: true
+draft: false
 author:
   name: "Hiten"
 slug: "the-weekly-byte-gamescom-engine-indie-august-24-30-2026"
