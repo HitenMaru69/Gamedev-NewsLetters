@@ -2,7 +2,7 @@
 title: "Game Dev Dispatch: NVIDIA DLSS 5, Engine Roadmaps & Industry Shifts (Sept 6, 2026)"
 excerpt: "This week, we dive into NVIDIA's groundbreaking DLSS 5 with neural rendering, significant engine updates from Unity and Unreal, a recap of Gamescom 2026, and crucial industry news including studio acquisitions and rising layoff figures."
 date: "2026-09-06T06:42:19.000Z"
-draft: true
+draft: false
 author:
   name: "Hiten"
 slug: "game-dev-dispatch-sept-6-2026"
