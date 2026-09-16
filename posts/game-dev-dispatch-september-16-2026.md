@@ -2,7 +2,7 @@
 title: "Game Dev Dispatch: Engine Evolutions, Indie Spotlights & Industry Insights"
 excerpt: "This week, we dive into the latest advancements in game development, from cutting-edge engine updates across Unity, Unreal, and Godot, to inspiring indie showcases and crucial industry news shaping the future of interactive entertainment."
 date: "2026-09-16T08:05:36.000Z"
-draft: true
+draft: false
 author:
   name: "Hiten"
 slug: "game-dev-dispatch-september-16-2026"
