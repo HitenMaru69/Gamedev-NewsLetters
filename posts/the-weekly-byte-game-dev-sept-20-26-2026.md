@@ -2,7 +2,7 @@
 title: "The Weekly Byte: Game Dev Insights & Engine Updates (Sept 20-26, 2026)"
 excerpt: "This week in game development: major engine updates from Unreal and Unity, a look at the thriving indie scene, and significant industry news including market trends and developer sentiments."
 date: "2026-09-27T12:19:45.000Z"
-draft: true
+draft: false
 author:
   name: "Hiten"
 slug: "the-weekly-byte-game-dev-sept-20-26-2026"
