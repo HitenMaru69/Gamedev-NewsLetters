@@ -2,7 +2,7 @@
 title: "Game Dev Dispatch: Engine Updates, Indie Showcases, and Major Releases (Oct 9-16)"
 excerpt: "This week in game development, Unreal Engine 5.8 goes live with key features, Godot 4.8 enters beta, and a flurry of indie showcases and major game releases kept the industry buzzing."
 date: "2026-10-16T07:47:12.000Z"
-draft: true
+draft: false
 author:
   name: "Hiten"
 slug: "game-dev-dispatch-oct-9-16-2026"
