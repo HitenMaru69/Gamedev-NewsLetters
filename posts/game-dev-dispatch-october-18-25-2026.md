@@ -2,7 +2,7 @@
 title: "Game Dev Dispatch: AI Debates, Engine Updates, and Indie Gems (October 18-25, 2026)"
 excerpt: "This week in game development, AI continues to be a hot topic with Epic Games' controversial AI MegaJam and industry veteran Masahiro Sakurai's warnings. We also cover significant updates from Godot Engine and Unity, alongside a spotlight on upcoming indie titles and key industry M&A."
 date: "2026-10-25T09:57:27.000Z"
-draft: true
+draft: false
 author:
   name: "Hiten"
 slug: "game-dev-dispatch-october-18-25-2026"
